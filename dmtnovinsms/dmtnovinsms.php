@@ -244,11 +244,12 @@ class DMTNovinSMS extends Module
     
     public function hookCreateAccount($params)
     {
-        if (Configuration::get($this->prefix . 'USERNAME') == '0' OR Configuration::get($this->prefix . 'PASSWORD') == '0' OR Configuration::get($this->prefix . 'NEWCUSTOMERA') == 0 AND Configuration::get($this->prefix . 'NEWCUSTOMERC') == 0)
+        if (Configuration::get($this->prefix . 'USERNAME') == '0' OR Configuration::get($this->prefix . 'PASSWORD') == '0' OR (Configuration::get($this->prefix . 'NEWCUSTOMERA') == 0 AND Configuration::get($this->prefix . 'NEWCUSTOMERC')) == 0)
             return true;
         
         if (Configuration::get($this->prefix . 'NEWCUSTOMERA') != 0 AND Configuration::get($this->prefix . 'ADMINPHONE') == 0)
             return true;
+
         require_once(_PS_MODULE_DIR_ . $this->name . '/classes/novinwebservice.php');
         $SMSNovin = new NovinWebService($this->prefix, Configuration::get('DMTNOSUSERNAME'), Configuration::get($this->prefix . 'PASSWORD'));
         
@@ -292,7 +293,7 @@ class DMTNovinSMS extends Module
         if (Configuration::get($this->prefix . 'USERNAME') == '0' OR Configuration::get($this->prefix . 'PASSWORD') == '0' OR (Configuration::get($this->prefix . 'NEWORDERA') == 0 AND Configuration::get($this->prefix . 'NEWORDERC') == 0))
             return true;
         
-        if (Configuration::get($this->prefix . 'NEWCUSTOMERA') != 0 AND Configuration::get($this->prefix . 'ADMINPHONE') == 0)
+        if (Configuration::get($this->prefix . 'NEWORDERA') != '0' AND Configuration::get($this->prefix . 'ADMINPHONE') == '0')
             return true;
         
         require_once(_PS_MODULE_DIR_ . $this->name . '/classes/novinwebservice.php');
@@ -348,13 +349,9 @@ class DMTNovinSMS extends Module
     public function hookUpdateOrderStatus($params)
     {
         
-        if (Configuration::get($this->prefix . 'USERNAME') == '0' OR Configuration::get($this->prefix . 'PASSWORD') == '0' OR (Configuration::get($this->prefix . 'NEWCUSTOMERA') == 0 AND Configuration::get($this->prefix . 'NEWCUSTOMERC') == 0))
+        if (Configuration::get($this->prefix . 'USERNAME') == '0' OR Configuration::get($this->prefix . 'PASSWORD') == '0' OR Configuration::get($this->prefix . 'UPDATEORDERC') == 0)
             return true;
-        
-        if (Configuration::get($this->prefix . 'UPDATEORDERC') == 0)
-            return true;
-        
-        
+  
         require_once(_PS_MODULE_DIR_ . $this->name . '/classes/novinwebservice.php');
         $SMSNovin = new NovinWebService($this->prefix, Configuration::get('DMTNOSUSERNAME'), Configuration::get($this->prefix . 'PASSWORD'));
         

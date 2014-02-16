@@ -244,7 +244,7 @@ class DMTNovinSMS extends Module
     
     public function hookCreateAccount($params)
     {
-        if (Configuration::get($this->prefix . 'USERNAME') == '0' OR Configuration::get($this->prefix . 'PASSWORD') == '0' OR (Configuration::get($this->prefix . 'NEWCUSTOMERA') == 0 AND Configuration::get($this->prefix . 'NEWCUSTOMERC')) == 0)
+        if (Configuration::get($this->prefix . 'USERNAME') == '0' OR Configuration::get($this->prefix . 'PASSWORD') == '0' OR (Configuration::get($this->prefix . 'NEWCUSTOMERA') == 0 AND Configuration::get($this->prefix . 'NEWCUSTOMERC') == 0))
             return true;
         
         if (Configuration::get($this->prefix . 'NEWCUSTOMERA') != 0 AND Configuration::get($this->prefix . 'ADMINPHONE') == 0)
